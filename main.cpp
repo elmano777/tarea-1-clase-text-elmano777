@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "Tarea_1.h"
+#include "text.h"
 using namespace std;
 
 int main() {

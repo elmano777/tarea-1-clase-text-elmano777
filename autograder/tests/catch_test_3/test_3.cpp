@@ -3,7 +3,7 @@
 //
 #include "catch.hpp"
 #include "redirect_io.h"
-#include "Tarea_1.h"
+#include "text.h"
 #include <iostream>
 #include <string>
 using namespace std;

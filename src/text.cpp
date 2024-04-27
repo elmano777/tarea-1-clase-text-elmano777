@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "Tarea_1.h"
+#include "text.h"
 #include <cstring>
 using namespace std;
 
