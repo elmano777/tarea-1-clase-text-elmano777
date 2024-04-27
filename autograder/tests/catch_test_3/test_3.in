@@ -1,0 +1,9 @@
+#input
+    Hola 1
+    Hola 2
+#output
+    Texto 1: Hola 1
+    Texto 2: Hola 2
+    Texto 3: Hola 1Hola 2
+    Texto 4: Hola 1/CUARTO
+#endtest
