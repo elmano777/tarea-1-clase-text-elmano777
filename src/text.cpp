@@ -7,116 +7,116 @@
 #include <cstring>
 using namespace std;
 
-Text::Text() : data(nullptr), length(0) {}
+Text::Text() : datos(nullptr), longitud(0) {}
 
-Text::Text(const char* str) {
-    length = std::strlen(str);
-    data = new char[length + 1];
-    std::strcpy(data, str);
+Text::Text(const char* cad) {
+    longitud = std::strlen(cad);
+    datos = new char[longitud + 1];
+    std::strcpy(datos, cad);
 }
 
-Text::Text(const Text& other) {
-    length = other.length;
-    data = new char[length + 1];
-    std::strcpy(data, other.data);
+Text::Text(const Text& otro) {
+    longitud = otro.longitud;
+    datos = new char[longitud + 1];
+    std::strcpy(datos, otro.datos);
 }
 
-Text::Text(Text&& other) noexcept {
-    length = other.length;
-    data = other.data;
-    other.data = nullptr;
-    other.length = 0;
+Text::Text(Text&& otro) noexcept {
+    longitud = otro.longitud;
+    datos = otro.datos;
+    otro.datos = nullptr;
+    otro.longitud = 0;
 }
 
 Text::~Text() {
-    delete[] data;
+    delete[] datos;
 }
 
-Text& Text::operator=(const Text& other) {
-    if (this != &other) {
-        delete[] data;
-        length = other.length;
-        data = new char[length + 1];
-        std::strcpy(data, other.data);
+Text& Text::operator=(const Text& otro) {
+    if (this != &otro) {
+        delete[] datos;
+        longitud = otro.longitud;
+        datos = new char[longitud + 1];
+        std::strcpy(datos, otro.datos);
     }
     return *this;
 }
 
-Text& Text::operator=(Text&& other) noexcept {
-    if (this != &other) {
-        delete[] data;
-        length = other.length;
-        data = other.data;
-        other.data = nullptr;
-        other.length = 0;
+Text& Text::operator=(Text&& otro) noexcept {
+    if (this != &otro) {
+        delete[] datos;
+        longitud = otro.longitud;
+        datos = otro.datos;
+        otro.datos = nullptr;
+        otro.longitud = 0;
     }
     return *this;
 }
 
-Text Text::operator^(const Text& other) const {
-    size_t newLength = length + other.length;
-    char* newData = new char[newLength + 1];
-    std::strcpy(newData, data);
-    std::strcat(newData, other.data);
-    Text result(newData);
-    delete[] newData;
-    return result;
+Text Text::operator^(const Text& otro) const {
+    size_t nuevaLongitud = longitud + otro.longitud;
+    char* nuevaDatos = new char[nuevaLongitud + 1];
+    std::strcpy(nuevaDatos, datos);
+    std::strcat(nuevaDatos, otro.datos);
+    Text resultado(nuevaDatos);
+    delete[] nuevaDatos;
+    return resultado;
 }
 
-Text Text::operator^(const char* str) const {
-    size_t strLength = std::strlen(str);
-    size_t newLength = length + strLength;
-    char* newData = new char[newLength + 1];
-    std::strcpy(newData, data);
-    std::strcat(newData, str);
-    Text result(newData);
-    delete[] newData;
-    return result;
+Text Text::operator^(const char* cad) const {
+    size_t longitudCad = std::strlen(cad);
+    size_t nuevaLongitud = longitud + longitudCad;
+    char* nuevaDatos = new char[nuevaLongitud + 1];
+    std::strcpy(nuevaDatos, datos);
+    std::strcat(nuevaDatos, cad);
+    Text resultado(nuevaDatos);
+    delete[] nuevaDatos;
+    return resultado;
 }
 
-Text& Text::operator^=(const Text& other) {
-    *this = *this ^ other;
+Text& Text::operator^=(const Text& otro) {
+    *this = *this ^ otro;
     return *this;
 }
 
-Text& Text::operator^=(const char* str) {
-    *this = *this ^ str;
+Text& Text::operator^=(const char* cad) {
+    *this = *this ^ cad;
     return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, const Text& text) {
-    os << text.data;
+std::ostream& operator<<(std::ostream& os, const Text& texto) {
+    os << texto.datos;
     return os;
 }
 
-std::istream& operator>>(std::istream& is, Text& text) {
+std::istream& operator>>(std::istream& is, Text& texto) {
     char buffer[1024];
     is.getline(buffer, 1024);
-    text = Text(buffer);
+    texto = Text(buffer);
     return is;
 }
 
-Text::Text(const std::string& str) {
-    length = str.length();
-    data = new char[length + 1];
-    std::strcpy(data, str.c_str());
+Text::Text(const std::string& cad) {
+    longitud = cad.length();
+    datos = new char[longitud + 1];
+    std::strcpy(datos, cad.c_str());
 }
 
 Text::operator std::string() const {
-    return std::string(data);
+    return std::string(datos);
 }
 
-Text& Text::operator=(const std::string& str) {
-    delete[] data;
-    length = str.length();
-    data = new char[length + 1];
-    std::strcpy(data, str.c_str());
+Text& Text::operator=(const std::string& cad) {
+    delete[] datos;
+    longitud = cad.length();
+    datos = new char[longitud + 1];
+    std::strcpy(datos, cad.c_str());
     return *this;
 }
 
-std::istream& getline(std::istream& is, Text& text) {
-    std::string line;
-    std::getline(is, line);
-    text = Text(line.c_str());
+std::istream& getline(std::istream& is, Text& texto) {
+    std::string linea;
+    std::getline(is, linea);
+    texto = Text(linea.c_str());
     return is;
 }
